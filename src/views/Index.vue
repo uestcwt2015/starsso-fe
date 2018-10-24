@@ -5,7 +5,7 @@
     </div>
     <div class="index-main" slot="main">
       <div class="desc">
-        <p class="maintitle">此处为主标题</p>
+        <p class="maintitle">星辰工作室统一身份认证平台</p>
         <p class="subtitle">此处为副标题</p>
       </div>
       <login-form></login-form>
@@ -42,13 +42,14 @@ export default {
 
   .desc {
     color: white;
+    text-align: left;
 
     .maintitle {
       font-size: 36px;
     }
 
     .subtitle {
-      font-size: 24px;
+      font-size: 18px;
     }
   }
 }
