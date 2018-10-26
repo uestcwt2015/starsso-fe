@@ -4,6 +4,7 @@
       class="form"
       :model="form"
       :rules="rules"
+      ref="form"
     >
       <el-form-item prop="username">
         <el-input v-model="form.username" placeholder="用户名" type="text"></el-input>
@@ -13,13 +14,15 @@
       </el-form-item>
       <router-link to="signup" class="link" tag="a">还没有账号？马上注册</router-link>
       <el-form-item>
-        <el-button type="primary" size="small" class="login">登录</el-button>
+        <el-button type="primary" size="small" class="login" @click="submitHandle">登录</el-button>
       </el-form-item>
     </el-form>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: "LoginForm",
   data() {
@@ -33,6 +36,20 @@ export default {
         password: [{ required: true, message: "密码不能为空", trigger: "blur" }]
       }
     };
+  },
+  methods: {
+    ...mapActions([
+      "postLoginForm"
+    ]),
+    submitHandle() {
+      this.$refs.form.validate(valid => {
+        if (valid) {
+          this.postLoginForm(this.form);
+        } else {
+          console.log(valid);
+        }
+      });
+    }
   }
 };
 </script>

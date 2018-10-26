@@ -19,9 +19,14 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    getGroupList() {
-      $http.getGroupList().then(data => {
-        this.commit("SET_GROUP_LIST", data);
+    getGroupList({ commit }) {
+      $http.getGroupList().then(res => {
+        commit("SET_GROUP_LIST", res.data);
+      });
+    },
+    postLoginForm({ commit }, params) {
+      $http.postLoginForm(params).then(res => {
+        console.log(res);
       });
     }
   }

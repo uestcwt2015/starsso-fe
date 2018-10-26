@@ -63,13 +63,11 @@ const http = {};
 Object.keys(apis).forEach(key => {
   if (apis[key].method === "get") {
     http[key] = function() {
-      return instance.get(apis[key].url).then(res => res.data.data);
+      return instance.get(apis[key].url).then(res => res.data);
     };
   } else if (apis[key].method === "post") {
     http[key] = function(data) {
-      return instance
-        .post(apis[key].url, { ...data })
-        .then(res => res.data.data);
+      return instance.post(apis[key].url, { ...data }).then(res => res.data);
     };
   }
 });

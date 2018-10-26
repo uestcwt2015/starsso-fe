@@ -8,5 +8,9 @@ export default {
   getGroupList: {
     method: "get",
     url: "/v1/star/group"
+  },
+  postLoginForm: {
+    method: "post",
+    url: "/sso/login"
   }
 };
