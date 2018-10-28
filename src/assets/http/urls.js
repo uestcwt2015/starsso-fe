@@ -12,5 +12,9 @@ export default {
   postLoginForm: {
     method: "post",
     url: "/sso/login"
+  },
+  postSignupForm: {
+    method: "post",
+    url: "/v1/star/member"
   }
 };

@@ -28,6 +28,11 @@ export default new Vuex.Store({
       $http.postLoginForm(params).then(res => {
         console.log(res);
       });
+    },
+    postSignupForm({ commit }, params) {
+      $http.postSignupForm(params).then(res => {
+        console.log(res);
+      });
     }
   }
 });

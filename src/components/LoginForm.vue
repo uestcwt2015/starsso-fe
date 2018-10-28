@@ -44,7 +44,7 @@ export default {
     submitHandle() {
       this.$refs.form.validate(valid => {
         if (valid) {
-          this.postLoginForm(this.form);
+          this.postLoginForm(this.form)
         } else {
           console.log(valid);
         }
