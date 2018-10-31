@@ -47,7 +47,9 @@ export default {
 .signup-main {
   display: block;
   width: 100%;
-  height: 100%;
+  height: calc(~"100vh - 60px");
+  padding: 40px 0;
+  box-sizing: border-box;
   overflow: scroll;
 }
 </style>

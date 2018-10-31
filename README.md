@@ -1,4 +1,4 @@
-# starsso-fe
+# starsso
 
 ## Project setup
 ```

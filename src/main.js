@@ -8,18 +8,27 @@ import {
   Container,
   Header,
   Main,
+  Aside,
+  Footer,
   Button,
   Form,
   Input,
   FormItem,
   Select,
   Option,
-  DatePicker
+  DatePicker,
+  Menu,
+  MenuItem,
+  Dropdown,
+  DropdownMenu,
+  DropdownItem
 } from "element-ui";
 
 Vue.use(Container);
 Vue.use(Header);
 Vue.use(Main);
+Vue.use(Footer);
+Vue.use(Aside);
 Vue.use(Button);
 Vue.use(Form);
 Vue.use(FormItem);
@@ -27,6 +36,11 @@ Vue.use(Input);
 Vue.use(Select);
 Vue.use(Option);
 Vue.use(DatePicker);
+Vue.use(Menu);
+Vue.use(MenuItem);
+Vue.use(Dropdown);
+Vue.use(DropdownMenu);
+Vue.use(DropdownItem);
 
 // Vue.use(httpPlugin);
 

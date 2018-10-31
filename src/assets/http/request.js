@@ -37,6 +37,7 @@ axios.interceptors.request.use(
 // 请求后处理拦截器
 axios.interceptors.response.use(
   res => {
+    console.log(res);
     if (res.code !== 0) {
       Message({
         type: "error",
@@ -63,11 +64,25 @@ const http = {};
 Object.keys(apis).forEach(key => {
   if (apis[key].method === "get") {
     http[key] = function() {
-      return instance.get(apis[key].url).then(res => res.data);
+      return instance.get(apis[key].url)
+        .then(res => res.data)
+        .catch(err => {
+          Message({
+            type: "error",
+            message: err && err.message
+          });
+        });
     };
   } else if (apis[key].method === "post") {
     http[key] = function(data) {
-      return instance.post(apis[key].url, { ...data }).then(res => res.data);
+      return instance.post(apis[key].url, { ...data })
+        .then(res => res.data)
+        .catch(err => {
+          Message({
+            type: "error",
+            message: err && err.message
+          });
+        });
     };
   }
 });

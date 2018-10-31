@@ -2,6 +2,7 @@
   <div class="form-container">
     <el-form
       class="form"
+      ref="form"
       :model="form"
       :rules="rules"
       label-width="80px"
@@ -16,7 +17,13 @@
         <el-input v-model="form.repassword" type="password"></el-input>
       </el-form-item>
       <el-form-item label="出生日期" prop="birthday">
-        <el-date-picker v-model="form.birthday" type="date" placeholder="选择日期"></el-date-picker>
+        <el-date-picker 
+          v-model="form.birthday" 
+          type="date" 
+          placeholder="选择日期"
+          format="yyyy-MM-dd"
+          value-format="yyyy-MM-dd"
+        ></el-date-picker>
       </el-form-item>
       <el-form-item label="姓名" prop="name">
         <el-input v-model="form.name" type="text"></el-input>
@@ -44,15 +51,18 @@
       <el-form-item label="电子邮件" prop="mail">
         <el-input v-model="form.mail"></el-input>
       </el-form-item>
-      <el-form-item label="联系地址" prop="address">
+      <!-- <el-form-item label="联系地址" prop="address">
         <el-input v-model="form.address" type="text"></el-input>
+      </el-form-item> -->
+      <el-form-item>
+        <el-button type="primary" size="small" class="signup" @click="submitHandle">注册</el-button>
       </el-form-item>
     </el-form>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "SignupForm",
@@ -85,7 +95,7 @@ export default {
       username: [{ required: true, message: "用户名不能未空", trigger: "blur" }],
       password: [{ required: true, message: "密码不能为空", trigger: "blur" }],
       repassword: [{ validator: comparePassword, trigger: "blur" }],
-      birthday: [{ type: "date", required: true, message: "请选择出生日期", trigger: "blur" }],
+      birthday: [{ required: true, message: "请选择出生日期", trigger: "blur" }],
       name: [{ required: true, message: "请输入姓名", trigger: "blur" }],
       gid: [{ required: true, message: "请选择小组", trigger: "change" }],
       sex: [{ required: true, message: "请选择性别", trigger: "change" }],
@@ -94,7 +104,7 @@ export default {
         { required: true, message: "请输入邮箱地址", trigger: "blur" },
         { type: "email", message: "请输入正确的邮箱地址", trigger: "blur" }
       ],
-      address: [{ required: true, message: "请输入联系地址", trigger: "blur" }]
+      // address: [{ required: true, message: "请输入联系地址", trigger: "blur" }]
     };
     /* eslint-enable */
 
@@ -118,6 +128,23 @@ export default {
     ...mapGetters([
       "groupList"
     ])
+  },
+  methods: {
+    ...mapActions([
+      "postSignupForm"
+    ]),
+    submitHandle() {
+      this.$refs.form.validate(valid => {
+        if (valid) {
+          let newForm = { ...this.form };
+          newForm.birthday += ' 00:00:00';
+          delete newForm.repassword;
+          this.postSignupForm(newForm);
+        } else {
+          console.log(valid);
+        }
+      });
+    }
   }
 };
 </script>
@@ -127,5 +154,9 @@ export default {
   text-align: left;
   width: 300px;
   margin: auto;
+}
+
+.signup {
+  width: 100%;
 }
 </style>
