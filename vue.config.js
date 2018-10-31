@@ -5,6 +5,14 @@
 
 module.exports = {
   devServer: {
+    historyApiFallback: {
+      rewrites: [
+        {
+          from: /^\/$/,
+          to: "/index.html"
+        }
+      ]
+    },
     proxy: {
       "/": {
         target: "http://sso.test.com"
