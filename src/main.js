@@ -21,7 +21,9 @@ import {
   MenuItem,
   Dropdown,
   DropdownMenu,
-  DropdownItem
+  DropdownItem,
+  Table,
+  TableColumn
 } from "element-ui";
 
 Vue.use(Container);
@@ -41,6 +43,8 @@ Vue.use(MenuItem);
 Vue.use(Dropdown);
 Vue.use(DropdownMenu);
 Vue.use(DropdownItem);
+Vue.use(Table);
+Vue.use(TableColumn);
 
 // Vue.use(httpPlugin);
 

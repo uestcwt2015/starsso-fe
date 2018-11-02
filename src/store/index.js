@@ -3,6 +3,11 @@ import Vuex from "vuex";
 import * as types from "./types";
 import { $http } from "../assets/http";
 
+import { Message } from "element-ui";
+
+// modules
+import devices from "./devices";
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -10,18 +15,27 @@ export default new Vuex.Store({
     user: {},
     signupGids: []
   },
+  modules: {
+    devices
+  },
   getters: {
     groupList: state => state.signupGids
   },
   mutations: {
-    [types.SET_GROUP_LIST](state, data) {
-      this.state.signupGids = data;
+    [types.SET_GROUP_LIST]: (state, params) => {
+      this.state.signupGids = params.data;
+    },
+    [types.SHOW_MESSAGE]: (state, params) => {
+      Message({
+        type: params.type,
+        message: params.message
+      });
     }
   },
   actions: {
     getGroupList({ commit }) {
       $http.getGroupList().then(res => {
-        commit("SET_GROUP_LIST", res.data);
+        commit("SET_GROUP_LIST", res);
       });
     },
     postLoginForm({ commit }, params) {
