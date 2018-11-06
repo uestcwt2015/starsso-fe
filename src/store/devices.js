@@ -78,14 +78,32 @@ const devicesModule = {
     },
     getOnlineDevices({ commit }) {
       $http.getOnlineDevices().then(res => {
-        commit(types.SET_ONLINE_DEVICES, res);
+        const lists = [];
+        Object.keys(res.data).forEach(key => {
+          lists.push({
+            mac: key,
+            ips: res.data[key].IPs
+          });
+        });
+
+        commit(types.SET_ONLINE_DEVICES, { data: lists });
       });
     },
-    boundCurrDevice: () => {
-      $http.bindCurrDevice();
+    bindCurrDevice: ({ state, dispatch }) => {
+      $http.bindCurrDevice({
+        mac: state.mineMAC
+      })
+      .then(() => {
+        dispatch("getMineBoundDevices");
+      });
     },
-    cancelBindDevice: () => {
-      $http.cancelBindDevice();
+    cancelBindDevice: ({ state }) => {
+      $http.cancelBindDevice({
+        mac: state.mineMAC
+      })
+      .then(() => {
+        dispatch("getMineBoundDevices");
+      });
     }
   }
 };

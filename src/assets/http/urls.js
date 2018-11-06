@@ -37,7 +37,7 @@ export default {
   },
   // 取消当前设备绑定
   cancelBindDevice: {
-    method: "post",
+    method: "delete",
     url: "/v1/star/mine"
   },
   // 获取当前在线设备列表

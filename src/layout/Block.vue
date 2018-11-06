@@ -22,5 +22,12 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.title {
+  text-align: left;
 
+  a {
+    text-decoration: none;
+    color: #222;
+  }
+}
 </style>

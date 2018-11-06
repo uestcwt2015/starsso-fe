@@ -87,6 +87,17 @@ Object.keys(apis).forEach(key => {
           });
         });
     };
+  } else if (apis[key].method === "delete") {
+    http[key] = function(data) {
+      return instance.delete(apis[key].url, { ...data })
+        .then(res => res.data)
+        .catch(err => {
+          Message({
+            type: "error",
+            message: err && err.message
+          });
+        });
+    };
   }
 });
 
