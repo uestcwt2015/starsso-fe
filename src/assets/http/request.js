@@ -16,14 +16,18 @@ const httpDeafultOpts = {
   timeout: 10000,
   responseType: "json",
   withCredentials: true,
-  header: {
+  headers: {
     "Content-Type": "application/json"
   }
 };
 
+const instance = axios.create({ ...httpDeafultOpts });
+
+
 // 请求预处理拦截器
-axios.interceptors.request.use(
+instance.interceptors.request.use(
   config => {
+    config.headers["Authorization"] = "Bearer " + window.localStorage.getItem("token");
     return config;
   },
   err => {
@@ -34,30 +38,29 @@ axios.interceptors.request.use(
   }
 );
 
-// 请求后处理拦截器
-axios.interceptors.response.use(
-  res => {
-    console.log(res);
-    if (res.code !== 0) {
-      Message({
-        type: "error",
-        message: res.msg
-      });
-    }
+// // 请求后处理拦截器
+// instance.interceptors.response.use(
+//   res => {
+//     if (res.code !== 0) {
+//       Message({
+//         type: "error",
+//         message: res.msg
+//       });
 
-    return Promise.reject(res.msg);
-  },
-  err => {
-    Message({
-      type: "error",
-      message: err && err.msg
-    });
+//       return Promise.reject(res.msg);
+//     } else {
+//       resolve(res);
+//     }
+//   },
+//   err => {
+//     Message({
+//       type: "error",
+//       message: err && err.msg
+//     });
 
-    return Promise.reject(err.msg);
-  }
-);
-
-const instance = axios.create({ ...httpDeafultOpts });
+//     return Promise.reject(err.msg);
+//   }
+// );
 
 const http = {};
 

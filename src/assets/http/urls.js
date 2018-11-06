@@ -13,7 +13,7 @@ export default {
   // 提交登录表单
   postLoginForm: {
     method: "post",
-    url: "/sso/login"
+    url: "/sso/login?appid=1"
   },
   // 提交注册表单
   postSignupForm: {
@@ -21,7 +21,7 @@ export default {
     url: "/v1/star/member"
   },
   // 获取当前用户的设备信息
-  getCurrDeviceiInfo: {
+  getCurrDeviceInfo: {
     method: "get",
     url: "/v1/star/device/myself"
   },
@@ -31,17 +31,17 @@ export default {
     url: "/v1/star/device/mine"
   },
   // 绑定当前设备
-  bindDevice: {
+  bindCurrDevice: {
     method: "post",
     url: "/v1/star/device/mine"
   },
-  // // 取消当前设备绑定
+  // 取消当前设备绑定
   cancelBindDevice: {
     method: "post",
     url: "/v1/star/mine"
   },
   // 获取当前在线设备列表
-  getIOnlineDeviceList: {
+  getOnlineDevices: {
     method: "get",
     url: "/v1/star/device/list"
   }

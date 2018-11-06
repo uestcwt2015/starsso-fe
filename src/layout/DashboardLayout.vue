@@ -17,9 +17,18 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: "DashboardLayout",
-  
+  methods: {
+    ...mapActions([
+      "getMineMAC",
+    ])
+  },
+  mounted() {
+    this.getMineMAC();
+  }
 }
 </script>
 

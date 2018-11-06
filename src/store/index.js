@@ -3,6 +3,8 @@ import Vuex from "vuex";
 import * as types from "./types";
 import { $http } from "../assets/http";
 
+import router from "../router";
+
 import { Message } from "element-ui";
 
 // modules
@@ -41,11 +43,13 @@ export default new Vuex.Store({
     postLoginForm({ commit }, params) {
       $http.postLoginForm(params).then(res => {
         console.log(res);
+        window.localStorage.setItem("token", res.data.token);
+        router.push("dashboard");
       });
     },
     postSignupForm({ commit }, params) {
       $http.postSignupForm(params).then(res => {
-        console.log(res);
+        router.push("dashboard");
       });
     }
   }

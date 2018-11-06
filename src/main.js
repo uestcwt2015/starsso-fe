@@ -26,6 +26,8 @@ import {
   TableColumn
 } from "element-ui";
 
+import Block from "./layout/Block.vue";
+
 Vue.use(Container);
 Vue.use(Header);
 Vue.use(Main);
@@ -47,6 +49,8 @@ Vue.use(Table);
 Vue.use(TableColumn);
 
 // Vue.use(httpPlugin);
+
+Vue.component("block", Block);
 
 Vue.config.productionTip = false;
 

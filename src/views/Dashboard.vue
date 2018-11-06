@@ -33,6 +33,9 @@
         </el-dropdown>
       </div>
     </div>
+    <div class="main-container" slot="main">
+      <router-view></router-view>
+    </div>
   </dashboard-layout>
 </template>
 
