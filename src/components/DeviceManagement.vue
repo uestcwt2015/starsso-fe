@@ -32,7 +32,12 @@
                 v-if="!scope.row.isBound"
                 @click="bindCurrDevice"
               >绑定</el-button>
-              <el-button type="info" size="mini" v-else>取消绑定</el-button>
+              <el-button 
+                type="info" 
+                size="mini" 
+                v-else
+                @click="cancelBindDevice(scope.row.mac)"
+              >取消绑定</el-button>
             </template>
           </el-table-column>
         </el-table>

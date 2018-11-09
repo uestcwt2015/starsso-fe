@@ -73,7 +73,11 @@ const devicesModule = {
     },
     getMineBoundDevices: ({ commit }) => {
       $http.getCurrBoundDeviceInfo().then(res => {
-        commit(types.SET_MINE_DEVICES, res);
+        let list = res.data.map(item => {
+          return item.mac[0];
+        });
+
+        commit(types.SET_MINE_DEVICES, { data: list });
       });
     },
     getOnlineDevices({ commit }) {
@@ -97,9 +101,9 @@ const devicesModule = {
         dispatch("getMineBoundDevices");
       });
     },
-    cancelBindDevice: ({ state }) => {
+    cancelBindDevice: ({ dispatch }, data) => {
       $http.cancelBindDevice({
-        mac: state.mineMAC
+        mac: data
       })
       .then(() => {
         dispatch("getMineBoundDevices");

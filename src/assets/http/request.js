@@ -23,7 +23,6 @@ const httpDeafultOpts = {
 
 const instance = axios.create({ ...httpDeafultOpts });
 
-
 // 请求预处理拦截器
 instance.interceptors.request.use(
   config => {
@@ -38,29 +37,24 @@ instance.interceptors.request.use(
   }
 );
 
-// // 请求后处理拦截器
-// instance.interceptors.response.use(
-//   res => {
-//     if (res.code !== 0) {
-//       Message({
-//         type: "error",
-//         message: res.msg
-//       });
+// 请求后处理拦截器
+instance.interceptors.response.use(
+  res => {
+    if (res.status !== 200 || (res.data.code !== 0 && res.data.code !== 200)) {
+      return Promise.reject(res.data.msg);
+    } else {
+      return res;
+    }
+  },
+  err => {
+    Message({
+      type: "error",
+      message: err && err.msg
+    });
 
-//       return Promise.reject(res.msg);
-//     } else {
-//       resolve(res);
-//     }
-//   },
-//   err => {
-//     Message({
-//       type: "error",
-//       message: err && err.msg
-//     });
-
-//     return Promise.reject(err.msg);
-//   }
-// );
+    return Promise.reject(err.msg);
+  }
+);
 
 const http = {};
 
@@ -83,18 +77,19 @@ Object.keys(apis).forEach(key => {
         .catch(err => {
           Message({
             type: "error",
-            message: err && err.message
+            message: err
           });
         });
     };
   } else if (apis[key].method === "delete") {
     http[key] = function(data) {
-      return instance.delete(apis[key].url, { ...data })
+      let query = data.mac.split(':').join("");
+      return instance.delete(`${apis[key].url}/${query}`)
         .then(res => res.data)
         .catch(err => {
           Message({
             type: "error",
-            message: err && err.message
+            message: err
           });
         });
     };

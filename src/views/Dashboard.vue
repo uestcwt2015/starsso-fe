@@ -28,7 +28,7 @@
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item @click="logoutHandle">退出登录</el-dropdown-item>
+            <el-dropdown-item @click.native="logoutHandle">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
@@ -41,13 +41,18 @@
 
 <script>
 import DashboardLayout from "../layout/DashboardLayout.vue";
+import { mapActions } from "vuex";
 
 export default {
   name: "Dashboard",
   components: { DashboardLayout },
   methods: {
+    ...mapActions([
+      "userLogout"
+    ]),
     logoutHandle() {
-      console.log("logout success");
+      console.log(1);
+      this.userLogout();
     }
   }
 };

@@ -15,6 +15,11 @@ export default {
     method: "post",
     url: "/sso/login?appid=1"
   },
+  // 退出登录
+  logout: {
+    method: "get",
+    url: "/sso/logout"
+  },
   // 提交注册表单
   postSignupForm: {
     method: "post",
@@ -38,7 +43,7 @@ export default {
   // 取消当前设备绑定
   cancelBindDevice: {
     method: "delete",
-    url: "/v1/star/mine"
+    url: "/v1/star/device/mine"
   },
   // 获取当前在线设备列表
   getOnlineDevices: {

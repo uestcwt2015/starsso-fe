@@ -42,14 +42,30 @@ export default new Vuex.Store({
     },
     postLoginForm({ commit }, params) {
       $http.postLoginForm(params).then(res => {
-        console.log(res);
         window.localStorage.setItem("token", res.data.token);
+        commit(types.SHOW_MESSAGE, {
+          type: "info",
+          message: "登录成功"
+        });
         router.push("dashboard");
       });
     },
     postSignupForm({ commit }, params) {
-      $http.postSignupForm(params).then(res => {
+      $http.postSignupForm(params).then(() => {
+        commit(types.SHOW_MESSAGE, {
+          type: "info",
+          message: "注册成功"
+        });
         router.push("dashboard");
+      });
+    },
+    userLogout({ commit }) {
+      $http.logout().then(() => {
+        commit(types.SHOW_MESSAGE, {
+          type: "info",
+          message: "退出成功"
+        });
+        router.push("/");
       });
     }
   }
